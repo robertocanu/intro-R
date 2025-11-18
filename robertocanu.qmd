@@ -5,7 +5,6 @@ format: html
 editor: visual
 ---
 
-Notes for Data Management.
 
 ## INDEXING
 
@@ -80,3 +79,80 @@ x
 ```
 The vector gets enlarged so that he has the position needed (the biggest one required, in this case 10), and filled with `NAs` in the other missing positions. 
 
+
+
+## LISTS 
+
+```{r}
+broken <- c(1L, 1.5, 'toto', FALSE)
+broken
+typeof(broken)
+```
+R tries to transform everything into one single type. 
+This happens most often with the elements being converted into `character` type. 
+
+
+### Creating a list
+```{r}
+bar <- list(1L, 1.4, 'toto', FALSE)
+bar
+```
+Presentation is now different: we have double brakets for each element, then a vector is indicated. Indeed, `bar` gets printed as a list of vectors. (TO CHECK)
+
+
+```{r}
+foo <- list(c(1,2,3,TRUE,length))
+foo
+length(foo)
+```
+As we can see here, it may also be a list of objects other than vectors, as `length` in the last case.
+
+```{r}
+foo[[1]]
+```
+### Side steps - weird values 
+
+```{r}
+NA   ## missing value
+NULL ## missing object 
+NaN  ## not a number 
+```
+
+```{r}
+0/0
+1/0
+-1/0
+1/0 + 1
+```
+```{r}
+foo[4]
+```
+Since there is no object at the 4th position. 
+
+```{r}
+x[5] <- c(2,1)
+x
+```
+This does not work, because we are telling it to put a vector inside of a list. Something similar occurs with `list`:
+```{r}
+x[5] <- list(2,1)
+x
+```
+
+So we have to do the following:
+```{r}
+x[5] <- list(c(2,1))
+x
+```
+```{r}
+y <- c(1,2,3)
+y 
+y[4]
+y[4] <- c('toto')
+```
+This transforms everything into `character` type. 
+```{r}
+y <- c(1,2,3)
+y[4] <- list(c('toto'))
+```
+This transforms `y` into a list, and now every element keeps its rightful type. 
