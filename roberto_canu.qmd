@@ -1,8 +1,0 @@
----
-title: "roberto_canu"
-format: html
-editor: source
----
-
-
-This is the document for R project. 
