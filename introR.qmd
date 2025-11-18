@@ -1,8 +1,0 @@
----
-title: "intro-R"
-format: html
-editor: visual
----
-
-
-THis is the document for R project. 
