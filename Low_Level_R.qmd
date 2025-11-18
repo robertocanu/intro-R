@@ -3,7 +3,98 @@ title: "Low Level R"
 format: html
 ---
 
-Notes for Data Management.
+## Types and classes 
+
+### Types 
+```{r}
+typeof(1.5)
+typeof("toto")
+typeof('also between single quotes')
+typeof(TRUE)
+typeof(1L)
+typeof(1)
+typeof(typeof)
+typeof(list())
+```
+What is a type ? In computer science, the way you can manipulate objects depends on objects type. If I manipulate a double (real numbers), I excepts the computer to provide me with usual operations on real numbers. 
+
+Different types : 
+
+-double -> real numbers
+-integers -> integers when specified (if not specified it will be a double)
+-character -> need to use libraries in R to do interesting with it
+-logical -> TRUE or FALSE
+-closure -> functions 
+-list 
+
+
+### Classes
+
+Classes are your own types that you created on your computer, Types are your environment on your computer. 
+
+```{r}
+data(iris)
+typeof(iris)
+class(iris)
+```
+You can create a class from a list or a vector. 
+What we have to understand is that we have operations that are available for types and that can be applied to classes. 
+
+### Vectors 
+
+#### Introduction
+
+Many things in R are vectors (and most of the other things are lists). 
+Everything is a vector but type is not vector since everything is, it is the type of elements of the vector. 
+
+A vector is a collection of values of the same type (possibly a single value). 
+
+```{r}
+x <- 15.25
+length(x)
+x[1] #the way to access an element of a vector
+length(length(x))
+typeof(length(x))
+
+y <- c(1, 2, 18.5)
+length(y)
+y[3]
+typeof(y)
+```
+The c function can be seen as a creation function or, more accurately, as a vector concatenation function. 
+
+#### Character vectors
+
+This is not R strength ...
+
+```{r}
+z <- "Alice"
+length(z)
+```
+The length of z is 1 because it is a vector of length 1. 
+
+R isn't efficient to treat character Data, but you can use the package 'stringr'. 
+
+```{r}
+#install.packages("stringr")
+library(stringr)
+```
+```{r}
+str_length(z)
+```
+```{r}
+complicated <- "💃💃💃我喜欢马"
+complicated
+length(complicated)
+str_length(complicated)
+```
+
+```{r}
+some_values <- c("💃💃💃", "我喜欢马")
+some_values
+length(some_values)  #Gives the length of the vector
+str_length(some_values)  #Gives a vector of the lengths
+```
 
 ## INDEXING
 
