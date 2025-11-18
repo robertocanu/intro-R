@@ -6,6 +6,7 @@ format: html
 
 ## Types and classes 
 
+### Types 
 ```{r}
 typeof(1.5)
 typeof("toto")
@@ -27,4 +28,16 @@ Different types :
 -closure -> functions 
 -list 
 
+
+### Classes
+
+Classes are your own types that you created on your computer, Types are your environment on your computer. 
+
+```{r}
+data(iris)
+typeof(iris)
+class(iris)
+```
+You can create a class from a list or a vector. 
+What we have to understand is that we have operations that are available for types and that can be applied to classes. 
 
