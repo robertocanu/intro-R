@@ -8,3 +8,46 @@ editor: visual
 Notes for Data Management. Lecture 5.
 
 Vectors. 
+
+## INDEXING
+
+```{r}
+x <- c(6,4,7,12,21,0)
+x[3]
+```
+
+```{r}
+x[5] <- 89
+```
+
+The following sets y to be not the same thing but basically a copy of x:
+```{r}
+y <- x
+```
+
+```{r}
+x[2] <- 33
+```
+x
+y
+
+Modifying x doesn't impact y (unlike in python and other programming languages). 
+
+It is called a lazy copy: saying x and y are the same (y <- x) they actually are the same. But when I call the modification of one of the elements of either of them, a copy is created for the purpose. 
+
+```{r}
+x
+x[c(2,2,1,4,5)]
+```
+This puts the number associated with each of the position written in c from x itself. 
+
+```{r}
+x[0]
+```
+Returns an empty numeric vector because index 0 has no meaning in R. 
+
+
+
+
+
+
