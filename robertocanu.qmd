@@ -1,0 +1,8 @@
+---
+title: "robertocanu"
+author: 'Roberto Canu'
+format: html
+editor: visual
+---
+
+Notes for Data Management
