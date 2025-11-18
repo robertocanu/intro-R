@@ -4,4 +4,27 @@ author: "Eugénie Derrien"
 format: html
 ---
 
-#Low level R 
+## Types and classes 
+
+```{r}
+typeof(1.5)
+typeof("toto")
+typeof('also between single quotes')
+typeof(TRUE)
+typeof(1L)
+typeof(1)
+typeof(typeof)
+typeof(list())
+```
+What is a type ? In computer science, the way you can manipulate objects depends on objects type. If I manipulate a double (real numbers), I excepts the computer to provide me with usual operations on real numbers. 
+
+Different types : 
+
+-double -> real numbers
+-integers -> integers when specified (if not specified it will be a double)
+-character -> need to use libraries in R to do interesting with it
+-logical -> TRUE or FALSE
+-closure -> functions 
+-list 
+
+
