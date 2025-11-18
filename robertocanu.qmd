@@ -5,9 +5,7 @@ format: html
 editor: visual
 ---
 
-Notes for Data Management. Lecture 5.
-
-Vectors. 
+Notes for Data Management.
 
 ## INDEXING
 
@@ -46,8 +44,39 @@ x[0]
 ```
 Returns an empty numeric vector because index 0 has no meaning in R. 
 
+```{r}
+typeof(NA)
+length(NA)
+```
+
+```{r}
+typeof(NA_integer_)
+```
+Now the type is integer.
+
+```{r}
+x
+x[c(4,1,0,15,6)]
+```
+`0` gets disregarded entirely, so no respective value is found in the new vector; `15` is not a position in x (that has 6 elements) and thus `NA` is printed instead. 
+
+```{r}
+y <- c('A', 'B', 'C')
+y[c(TRUE, FALSE, FALSE)]
+```
+
+```{r}
+x
+x[c(-1,-4,-5)]
+x[c(-2,-3,-6)]
+```
+We must use either positive indexes or negative ones. The negative indexes remove the value at that position.
 
 
-
-
+```{r}
+x
+x[c(2,3,10)] <- c(7,88,190)
+x
+```
+The vector gets enlarged so that he has the position needed (the biggest one required, in this case 10), and filled with `NAs` in the other missing positions. 
 
