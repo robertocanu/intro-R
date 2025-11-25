@@ -5,7 +5,6 @@ format: html
 editor: visual
 ---
 
-
 ## INDEXING
 
 ```{r}
@@ -18,6 +17,7 @@ x[5] <- 89
 ```
 
 The following sets y to be not the same thing but basically a copy of x:
+
 ```{r}
 y <- x
 ```
@@ -25,23 +25,25 @@ y <- x
 ```{r}
 x[2] <- 33
 ```
-x
-y
 
-Modifying x doesn't impact y (unlike in python and other programming languages). 
+x y
 
-It is called a lazy copy: saying x and y are the same (y <- x) they actually are the same. But when I call the modification of one of the elements of either of them, a copy is created for the purpose. 
+Modifying x doesn't impact y (unlike in python and other programming languages).
+
+It is called a lazy copy: saying x and y are the same (y \<- x) they actually are the same. But when I call the modification of one of the elements of either of them, a copy is created for the purpose.
 
 ```{r}
 x
 x[c(2,2,1,4,5)]
 ```
-This puts the number associated with each of the position written in c from x itself. 
+
+This puts the number associated with each of the position written in c from x itself.
 
 ```{r}
 x[0]
 ```
-Returns an empty numeric vector because index 0 has no meaning in R. 
+
+Returns an empty numeric vector because index 0 has no meaning in R.
 
 ```{r}
 typeof(NA)
@@ -51,13 +53,15 @@ length(NA)
 ```{r}
 typeof(NA_integer_)
 ```
+
 Now the type is integer.
 
 ```{r}
 x
 x[c(4,1,0,15,6)]
 ```
-`0` gets disregarded entirely, so no respective value is found in the new vector; `15` is not a position in x (that has 6 elements) and thus `NA` is printed instead. 
+
+`0` gets disregarded entirely, so no respective value is found in the new vector; `15` is not a position in x (that has 6 elements) and thus `NA` is printed instead.
 
 ```{r}
 y <- c('A', 'B', 'C')
@@ -69,48 +73,49 @@ x
 x[c(-1,-4,-5)]
 x[c(-2,-3,-6)]
 ```
-We must use either positive indexes or negative ones. The negative indexes remove the value at that position.
 
+We must use either positive indexes or negative ones. The negative indexes remove the value at that position.
 
 ```{r}
 x
 x[c(2,3,10)] <- c(7,88,190)
 x
 ```
-The vector gets enlarged so that he has the position needed (the biggest one required, in this case 10), and filled with `NAs` in the other missing positions. 
 
+The vector gets enlarged so that he has the position needed (the biggest one required, in this case 10), and filled with `NAs` in the other missing positions.
 
-
-## LISTS 
+## LISTS
 
 ```{r}
 broken <- c(1L, 1.5, 'toto', FALSE)
 broken
 typeof(broken)
 ```
-R tries to transform everything into one single type. 
-This happens most often with the elements being converted into `character` type. 
 
+R tries to transform everything into one single type. This happens most often with the elements being converted into `character` type.
 
 ### Creating a list
+
 ```{r}
 bar <- list(1L, 1.4, 'toto', FALSE)
 bar
 ```
-Presentation is now different: we have double brakets for each element, then a vector is indicated. Indeed, `bar` gets printed as a list of vectors. (TO CHECK)
 
+Presentation is now different: we have double brakets for each element, then a vector is indicated. Indeed, `bar` gets printed as a list of vectors. (TO CHECK)
 
 ```{r}
 foo <- list(c(1,2,3,TRUE,length))
 foo
 length(foo)
 ```
+
 As we can see here, it may also be a list of objects other than vectors, as `length` in the last case.
 
 ```{r}
 foo[[1]]
 ```
-### Side steps - weird values 
+
+### Side steps - weird values
 
 ```{r}
 NA   ## missing value
@@ -124,35 +129,90 @@ NaN  ## not a number
 -1/0
 1/0 + 1
 ```
+
 ```{r}
 foo[4]
 ```
-Since there is no object at the 4th position. 
+
+Since there is no object at the 4th position.
 
 ```{r}
 x[5] <- c(2,1)
 x
 ```
+
 This does not work, because we are telling it to put a vector inside of a list. Something similar occurs with `list`:
+
 ```{r}
 x[5] <- list(2,1)
 x
 ```
 
 So we have to do the following:
+
 ```{r}
 x[5] <- list(c(2,1))
 x
 ```
+
 ```{r}
 y <- c(1,2,3)
 y 
 y[4]
 y[4] <- c('toto')
 ```
-This transforms everything into `character` type. 
+
+This transforms everything into `character` type.
+
 ```{r}
 y <- c(1,2,3)
 y[4] <- list(c('toto'))
 ```
-This transforms `y` into a list, and now every element keeps its rightful type. 
+
+This transforms `y` into a list, and now every element keeps its rightful type.
+
+```{r}
+class(y)
+class(y[1])
+```
+
+The indexing operation does not change the type or class of the object.
+
+### Double brakets
+
+```{r}
+x <- list(c(1,2,3), c(TRUE, FALSE), LETTERS[10:15])
+x[1]
+x[[1]]
+```
+
+```{r}
+x[2] <- c('toto', 'bar')
+x[[2]] <- c('toto', 'bar')
+x  
+```
+
+We have to use double brakets to assign an object like a list to another list.
+
+```{r}
+y <- list(1:4, list(letters[1:5]), list(c('foo', 'type')))
+y[c(3,2,1,2)]
+```
+
+### Names
+
+```{r}
+z <- list(keys = c('A', 'B', 'C'), values = c(10, 11, 13))
+z
+z[c(1,2)]
+z$keys
+```
+
+```{r}
+z$val
+z['values']
+z['values'] |> class()
+z[['values']] |> class()
+```
+
+The first line doesn't give an error in R, which may be problematic.
